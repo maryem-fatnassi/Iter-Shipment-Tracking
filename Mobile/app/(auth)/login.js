@@ -12,7 +12,8 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
-import { styles } from "../styles/auth.styles";
+import { styles } from "../../styles/auth.styles";
+import { router } from "expo-router";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -29,6 +30,9 @@ export default function Login() {
       });
       const data = await response.json();
       console.log(data);
+      if(response.ok){
+        router.replace("/DashboardScreenRoute");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -77,7 +81,7 @@ export default function Login() {
 
         <View style={styles.linkContainer}>
           <Text>{`Don't have an account?`}</Text>
-          <Link href={"./signUp"} style={styles.link}>
+          <Link href="/signUp" style={styles.link}>
             Sign Up
           </Link>
         </View>

@@ -3,7 +3,7 @@ import { View, TextInput, Text, Alert, ScrollView, KeyboardAvoidingView, Platfor
 import { Picker } from '@react-native-picker/picker';
 import {Ionicons} from '@expo/vector-icons';
 import { Link } from 'expo-router';
-import { styles } from '../styles/auth.styles';
+import { styles } from '../../styles/auth.styles';
 
 export default function SignUpScreen() {
   const [username, setName] = useState('');
@@ -94,7 +94,7 @@ export default function SignUpScreen() {
 
         <View style={styles.linkContainer}>
           <Text >Already have an account?</Text>
-          <Link href={'./login'} style={styles.link}>Login</Link>
+          <Link href="/login" style={styles.link}>Login</Link>
         </View>
 
       </ScrollView>
