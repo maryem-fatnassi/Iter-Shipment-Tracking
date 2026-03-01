@@ -8,7 +8,7 @@ import {
   Feather,
 } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import styles from '../styles/layout'
+import {styles} from '../styles/layout';
 
 function CustomDrawerContent(props) {
   const router = useRouter();
@@ -17,32 +17,27 @@ function CustomDrawerContent(props) {
     {
       name: "dashboard",
       label: "Dashboard",
-      icon: <MaterialIcons name="dashboard" size={22} color="#fff" />,
+      icon: <MaterialIcons name="dashboard" size={32} color="#fff" />,
     },
     {
       name: "shipments",
       label: "Shipments Management",
-      icon: <FontAwesome5 name="truck-moving" size={22} color="#fff" />,
+      icon: <FontAwesome5 name="truck-moving" size={24} color="#fff" />,
     },
     {
       name: "drivers",
       label: "Drivers Management",
-      icon: <Entypo name="user" size={22} color="#fff" />,
+      icon: <Entypo name="user" size={28} color="#fff" />,
     },
     {
       name: "create-shipment",
       label: "Create Shipment",
-      icon: <Feather name="plus-circle" size={22} color="#fff" />,
+      icon: <Feather name="plus-circle" size={28} color="#fff" />,
     },
     {
       name: "live-tracking",
       label: "Live Tracking Map",
-      icon: <MaterialIcons name="map" size={22} color="#fff" />,
-    },
-    {
-      name: "logout",
-      label: "Log-Out",
-      icon: <MaterialIcons name="logout" size={22} color="#fff" />,
+      icon: <MaterialIcons name="map" size={28} color="#fff" />,
     },
   ];
 
@@ -55,11 +50,11 @@ function CustomDrawerContent(props) {
         paddingTop: 40,
       }}
     >
-      <View>
-        <Image source={require("../assets/logo.png")}  />
+      <View style={styles.logoContainer}>
+        <Image source={require("../assets/logo.png")}  style={styles.logo}/>
       </View>
 
-      <View >
+      <View style={styles.links}>
         {items.map((item) => (
           <TouchableOpacity
             key={item.name}
@@ -73,9 +68,24 @@ function CustomDrawerContent(props) {
             onPress={() => router.push(`/${item.name}`)}
           >
             <View style={{ marginRight: 15 }}>{item.icon}</View>
-            <Text style={{ color: "#fff", fontSize: 16 }}>{item.label}</Text>
+            <Text style={{ color: "#fff", fontSize: 16 ,fontWeight:'bold'}}>{item.label}</Text>
           </TouchableOpacity>
         ))}
+        <TouchableOpacity
+            key='logout'
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              paddingVertical: 15,
+              paddingHorizontal: 20,
+              marginBottom: 10,
+              marginTop:90
+            }}
+            onPress={() => router.push('/login')}
+          >
+            <View style={{ marginRight: 15 }}><MaterialIcons name="logout" size={28} color="#fff" /></View>
+            <Text style={{ color: "#fff", fontSize: 16,fontWeight:'bold' }}>Log-Out</Text>
+          </TouchableOpacity>
       </View>
     </DrawerContentScrollView>
   );
@@ -89,7 +99,7 @@ export default function Layout() {
         headerShown: true,
         drawerStyle: {
           backgroundColor: "#1E3A8A",
-          width: 260,
+          width: 280,
         },
       }}
     />
