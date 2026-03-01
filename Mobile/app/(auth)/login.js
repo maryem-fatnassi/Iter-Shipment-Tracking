@@ -31,7 +31,7 @@ export default function Login() {
       const data = await response.json();
       console.log(data);
       if(response.ok){
-        router.replace("/DashboardScreenRoute");
+        router.replace("/(Manager)/dashboard");
       }
     } catch (error) {
       console.log(error);

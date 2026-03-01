@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, TextInput, Text, Alert, ScrollView, KeyboardAvoidingView, Platform, Pressable, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import {Ionicons} from '@expo/vector-icons';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { styles } from '../../styles/auth.styles';
 
 export default function SignUpScreen() {
@@ -24,6 +24,9 @@ export default function SignUpScreen() {
     });
     const data = await response.json();
     console.log(data);
+    if(response.ok){
+      router.replace("/(Manager)/dashboard");
+    }
     } catch (error) {
       console.log(error)
     }
