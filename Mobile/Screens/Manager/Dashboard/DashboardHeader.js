@@ -17,7 +17,7 @@ export default function DashboardHeader({ userName = "Manager" }) {
 
   return (
     <View>
-        <CurvedHeader height={180} curveHeight={60} color="#1E3A8A" />
+        <CurvedHeader height={130} curveHeight={60} color="#1E3A8A" />
         <View style={styles.topRow}>
           {/* Left Section */}
          <View>
