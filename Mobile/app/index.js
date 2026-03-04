@@ -69,5 +69,5 @@ import ShipmentsManagement from "../Screens/Manager/Shipments/ShipmentsManage";
 
 
 export default function drivers(){
-  return <CreateShipments/>
+  return <ShipmentsManagement/>
 }

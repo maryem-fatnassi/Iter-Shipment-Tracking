@@ -1,11 +1,15 @@
 const mongoose = require("mongoose");
 
 const shipmentSchema = new mongoose.Schema({
-    id : Number,
+    id :{
+        type :String,
+        required:true,
+        unique :true
+    },
     origin : String,
     destination : String,
-    date : Number,
-    status : 'Pending',
+    date : Date,
+    status : String,
     driverName : String,
     orderCount : Number
 },{timestamps:true});

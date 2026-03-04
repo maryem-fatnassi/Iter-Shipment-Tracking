@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
   },
   headerTitle: {
-    fontSize: 28, 
+    fontSize: 25, 
     fontWeight: '900', 
     color: '#1E3A8A', 
     letterSpacing: -1
@@ -41,6 +41,18 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: "#fff",
     fontWeight: 500,
+    marginRight:2
+  },
+  createBtnContainer:{
+    backgroundColor:'#ccc',
+    width:100,
+    height:47,
+    borderRadius: 14,
+  },
+  createBtn:{
+    textAlign:'center',
+    margin:'auto',
+    fontWeight:'bold'
   },
   card: {
     backgroundColor: "#fff",

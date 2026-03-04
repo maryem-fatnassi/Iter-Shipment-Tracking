@@ -251,13 +251,19 @@ export default function DriversScreen() {
       </View>
 
       {/* Search */}
-      <TextInput
+      <View style={{flexDirection:'row',justifyContent:'center'}}>
+        <TextInput
         placeholder="Search driver by name or phone.."
         placeholderTextColor="#fff"
         style={styles.search}
         value={search}
         onChangeText={setSearch}
       />
+
+      <TouchableOpacity style={styles.createBtnContainer}>
+        <Text style={styles.createBtn}>Create Driver</Text>
+      </TouchableOpacity>
+      </View>
 
       {/* List */}
       <FlatList

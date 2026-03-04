@@ -63,17 +63,17 @@ export default function CreateShipments() {
               />
             </View>
 
-            {/* <View style={styles.row}> */}
+            <View style={styles.row}>
               <CustomInput 
                 label="DATE"
                 icon="calendar-month-outline" 
                 placeholder="03/04/2026" 
-                // halfWidth 
+                halfWidth 
                 isFocused={focusedField === 'date'}
                 onFocus={() => setFocusedField('date')}
                 onBlur={() => setFocusedField(null)}
               />
-               {/* <CustomInput 
+               <CustomInput 
                 label="STATUS"
                 icon="list-status" 
                 placeholder="Pending" 
@@ -81,8 +81,8 @@ export default function CreateShipments() {
                 isFocused={focusedField === 'status'}
                 onFocus={() => setFocusedField('status')}
                 onBlur={() => setFocusedField(null)}
-              /> */}
-            {/* </View> */}
+              /> 
+             </View>
 
             <CustomInput 
               label="DRIVER NAME"

@@ -11,6 +11,8 @@ connectDB();
 
 app.use("/api/users",require("./Routes/signUp"));
 app.use("/api/users",require("./Routes/login"));
+app.use("/add",require("./Routes/shipments"));
+app.use("/get",require("./Routes/getShipments"))
 
 app.listen(process.env.PORT,"0.0.0.0",()=>console.log("Server is running"));
 

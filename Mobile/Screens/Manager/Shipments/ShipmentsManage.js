@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -12,22 +12,35 @@ import { reusableStyle } from "../../reusableStyle";
 import { router } from "expo-router";
 import { styles } from "../Styles/shipmentsManage";
 
-const shipments = [
-  { id: "001", originCity: "Tunis",destinationCity:"Gabes", date: "24 Feb 2026", status: "Delivered", driver: "Mohamed Salah" , orderCount : 20},
-  { id: "002", originCity: "Nabeul",destinationCity:"Djerba", date: "26 Feb 2026", status: "Pending" ,driver: "Ahmed Ben Ali" ,orderCount : 20},
-  { id: "003", originCity: "Kasr Hlel",destinationCity:"Djerba", date: "27 Feb 2026", status: "Delayed", driver: "Youssef Trabelsi" ,orderCount : 20 },
-  { id: "004", originCity: "Nabeul",destinationCity:"Djerba", date: "26 Feb 2026", status: "Pending" ,driver: "Ali Trabelsi" ,orderCount : 20},
-  { id: "005", originCity: "Kasr Hlel",destinationCity:"Djerba", date: "27 Feb 2026", status: "Delayed" ,driver: "Mohamed Salah", orderCount : 20},
-];
+// const shipments = [
+//   { id: "001", originCity: "Tunis",destinationCity:"Gabes", date: "24 Feb 2026", status: "Delivered", driver: "Mohamed Salah" , orderCount : 20},
+//   { id: "002", originCity: "Nabeul",destinationCity:"Djerba", date: "26 Feb 2026", status: "Pending" ,driver: "Ahmed Ben Ali" ,orderCount : 20},
+//   { id: "003", originCity: "Kasr Hlel",destinationCity:"Djerba", date: "27 Feb 2026", status: "Delayed", driver: "Youssef Trabelsi" ,orderCount : 20 },
+//   { id: "004", originCity: "Nabeul",destinationCity:"Djerba", date: "26 Feb 2026", status: "Pending" ,driver: "Ali Trabelsi" ,orderCount : 20},
+//   { id: "005", originCity: "Kasr Hlel",destinationCity:"Djerba", date: "27 Feb 2026", status: "Delayed" ,driver: "Mohamed Salah", orderCount : 20},
+// ];
 
 export default function ShipmentsManagement() {
     const [search, setSearch] = useState("");
-    const delayedCount = shipments.filter(s => s.status === "Delayed").length;
-    const filteredShipments = shipments.filter(item =>
-    item.id.toLowerCase().includes(search.toLowerCase()) ||
-    item.city.toLowerCase().includes(search.toLowerCase())
-);
 
+    const [shipments , setShipments] = useState([]);
+    // const [filteredShipments, setFilteredShipments] = useState([])
+    useEffect(()=>{
+      fetch("http://192.168.1.9:5000/get/shipments")
+      .then(res => res.json())
+      .then(data => setShipments(data))
+      .catch(error => console.error(error))
+    },[]);
+    console.log(shipments)
+
+      const filteredShipments = shipments.filter(item =>
+       item.id.toLowerCase().includes(search.toLowerCase()) ||
+       item.origin.toLowerCase().includes(search.toLowerCase())
+      );
+      
+
+
+    const delayedCount = shipments.filter(s => s.status === "Delayed").length;
   const getStatusColor = (status) => {
     switch (status) {
       case "Delivered":
@@ -81,12 +94,12 @@ export default function ShipmentsManagement() {
             <View>
               <Text style={styles.tracking}>#SH{item.id}</Text>
               <View style={{flexDirection:'row',alignItems:'center'}}>
-                <Text style={styles.city}>{item.originCity} → </Text>
-                <Text style={styles.city}>{item.destinationCity}</Text>
+                <Text style={styles.city}>{item.origin} → </Text>
+                <Text style={styles.city}>{item.destination}</Text>
               </View>
               <Text style={styles.date}>{item.date}</Text>
               <View style={{marginTop:15,}}>
-                <Text><Text style={{fontWeight:'bold',fontSize:16,color:'#1E3A8A'}}>Driver : </Text>{item.driver}</Text>
+                <Text><Text style={{fontWeight:'bold',fontSize:16,color:'#1E3A8A'}}>Driver : </Text>{item.driverName}</Text>
                 <Text style={{marginTop:5,fontWeight:'600'}}>{item.orderCount} Orders 📦</Text>
               </View>
             </View>

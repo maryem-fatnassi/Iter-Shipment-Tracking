@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
     marginBottom: 30 
   },
   title: { 
-    fontSize: 30, 
+    fontSize: 26, 
     fontWeight: '900', 
     color: '#1E3A8A', 
     letterSpacing: -1
