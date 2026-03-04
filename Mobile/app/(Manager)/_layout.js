@@ -17,27 +17,27 @@ function CustomDrawerContent(props) {
     {
       name: "dashboard",
       label: "Dashboard",
-      icon: <MaterialIcons name="dashboard" size={32} color="#fff" />,
+      icon: <MaterialIcons name="dashboard" size={30} color="#fff" />,
     },
     {
       name: "shipments",
       label: "Shipments Management",
-      icon: <FontAwesome5 name="truck-moving" size={24} color="#fff" />,
+      icon: <FontAwesome5 name="truck-moving" size={20} color="#fff" />,
     },
     {
       name: "drivers",
       label: "Drivers Management",
-      icon: <Entypo name="user" size={28} color="#fff" />,
+      icon: <Entypo name="user" size={20} color="#fff" />,
     },
     {
       name: "create-shipment",
       label: "Create Shipment",
-      icon: <Feather name="plus-circle" size={28} color="#fff" />,
+      icon: <Feather name="plus-circle" size={20} color="#fff" />,
     },
     {
       name: "live-tracking",
       label: "Live Tracking Map",
-      icon: <FontAwesome5 name="map-marked-alt" size={24} color="#fff" />,
+      icon: <FontAwesome5 name="map-marked-alt" size={20} color="#fff" />,
     },
   ];
 
@@ -83,7 +83,7 @@ function CustomDrawerContent(props) {
             }}
             onPress={() => router.push('/login')}
           >
-            <View style={{ marginRight: 15 }}><MaterialIcons name="logout" size={28} color="#fff" /></View>
+            <View style={{ marginRight: 15 }}><MaterialIcons name="logout" size={20} color="#fff" /></View>
             <Text style={{ color: "#fff", fontSize: 16,fontWeight:'bold' }}>Log-Out</Text>
           </TouchableOpacity>
       </View>

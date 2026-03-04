@@ -7,7 +7,9 @@
 // import {Animated}  from "react-native";
 // import { styles } from "../styles/appSplash";
 
-import DriversManagement from "../Screens/Manager/DriversManage/drivers";
+import DriversScreen from "../Screens/Manager/DriversManage/drivers";
+import CreateShipments from "../Screens/Manager/Shipments/CreateShipments";
+import ShipmentsManagement from "../Screens/Manager/Shipments/ShipmentsManage";
 
 
 // const { width } = Dimensions.get("window");
@@ -67,5 +69,5 @@ import DriversManagement from "../Screens/Manager/DriversManage/drivers";
 
 
 export default function drivers(){
-  return <DriversManagement/>
+  return <CreateShipments/>
 }

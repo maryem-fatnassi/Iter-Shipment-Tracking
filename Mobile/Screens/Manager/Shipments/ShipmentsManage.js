@@ -10,21 +10,22 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { reusableStyle } from "../../reusableStyle";
 import { router } from "expo-router";
+import { styles } from "../Styles/shipmentsManage";
 
 const shipments = [
-  { id: "001", city: "Tunis → Gabes", date: "24 Feb 2026", status: "Delivered" },
-  { id: "002", city: "Nabeul → Djerba", date: "26 Feb 2026", status: "Pending" },
-  { id: "003", city: "Kasr Hlel → Sousse", date: "27 Feb 2026", status: "Delayed" },
-  { id: "004", city: "Nabeul → Djerba", date: "26 Feb 2026", status: "Pending" },
-  { id: "005", city: "Kasr Hlel → Sousse", date: "27 Feb 2026", status: "Delayed" },
+  { id: "001", originCity: "Tunis",destinationCity:"Gabes", date: "24 Feb 2026", status: "Delivered", driver: "Mohamed Salah" , orderCount : 20},
+  { id: "002", originCity: "Nabeul",destinationCity:"Djerba", date: "26 Feb 2026", status: "Pending" ,driver: "Ahmed Ben Ali" ,orderCount : 20},
+  { id: "003", originCity: "Kasr Hlel",destinationCity:"Djerba", date: "27 Feb 2026", status: "Delayed", driver: "Youssef Trabelsi" ,orderCount : 20 },
+  { id: "004", originCity: "Nabeul",destinationCity:"Djerba", date: "26 Feb 2026", status: "Pending" ,driver: "Ali Trabelsi" ,orderCount : 20},
+  { id: "005", originCity: "Kasr Hlel",destinationCity:"Djerba", date: "27 Feb 2026", status: "Delayed" ,driver: "Mohamed Salah", orderCount : 20},
 ];
 
 export default function ShipmentsManagement() {
     const [search, setSearch] = useState("");
-  const delayedCount = shipments.filter(s => s.status === "Delayed").length;
-  const filteredShipments = shipments.filter(item =>
-  item.id.toLowerCase().includes(search.toLowerCase()) ||
-  item.city.toLowerCase().includes(search.toLowerCase())
+    const delayedCount = shipments.filter(s => s.status === "Delayed").length;
+    const filteredShipments = shipments.filter(item =>
+    item.id.toLowerCase().includes(search.toLowerCase()) ||
+    item.city.toLowerCase().includes(search.toLowerCase())
 );
 
   const getStatusColor = (status) => {
@@ -79,8 +80,15 @@ export default function ShipmentsManagement() {
           <TouchableOpacity key={index} style={styles.card} >
             <View>
               <Text style={styles.tracking}>#SH{item.id}</Text>
-              <Text style={styles.city}>{item.city}</Text>
+              <View style={{flexDirection:'row',alignItems:'center'}}>
+                <Text style={styles.city}>{item.originCity} → </Text>
+                <Text style={styles.city}>{item.destinationCity}</Text>
+              </View>
               <Text style={styles.date}>{item.date}</Text>
+              <View style={{marginTop:15,}}>
+                <Text><Text style={{fontWeight:'bold',fontSize:16,color:'#1E3A8A'}}>Driver : </Text>{item.driver}</Text>
+                <Text style={{marginTop:5,fontWeight:'600'}}>{item.orderCount} Orders 📦</Text>
+              </View>
             </View>
 
             <View style={styles.rightSide}>
@@ -130,9 +138,8 @@ export default function ShipmentsManagement() {
   );
 }
 
-/* ========================= */
-/* 🔹 STAT CARD COMPONENT */
-/* ========================= */
+
+/*  STAT CARD COMPONENT */
 
 const StatCard = ({ icon, title, value, color }) => {
   return (
@@ -146,134 +153,4 @@ const StatCard = ({ icon, title, value, color }) => {
   );
 };
 
-/* ========================= */
-/* 🔹 STYLES */
-/* ========================= */
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F3F6FD",
-    padding: 20,
-  },
-
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-
-  title: {
-    fontSize: 22,
-    fontWeight: "700",
-    color: "#111827",
-  },
-
-  addButton: {
-    backgroundColor: "#1E3A8A",
-    padding: 10,
-    borderRadius: 12,
-    elevation: 4,
-  },
-
-  statsRow: {
-    flexDirection: "row",
-    marginVertical: 20,
-  },
-
-  statCard: {
-    backgroundColor: "#fff",
-    padding: 15,
-    borderRadius: 20,
-    marginRight: 15,
-    width: 120,
-    alignItems: "center",
-    elevation: 4,
-  },
-
-  iconCircle: {
-    padding: 10,
-    borderRadius: 50,
-    marginBottom: 10,
-  },
-
-  statValue: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#111827",
-  },
-
-  statTitle: {
-    fontSize: 13,
-    color: "#6B7280",
-  },
-
-  searchContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#1E3A8A",
-    paddingHorizontal: 15,
-    borderRadius: 25,
-    height: 45,
-    elevation: 3,
-  },
-
-  searchInput: {
-    marginLeft: 10,
-    flex: 1,
-    color: "#fff",
-  },
-
-  card: {
-    backgroundColor: "#fff",
-    padding: 16,
-    borderRadius: 18,
-    marginVertical: 8,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    elevation: 3,
-  },
-
-  tracking: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: "#111827",
-  },
-
-  city: {
-    fontSize: 14,
-    color: "#6B7280",
-    marginTop: 3,
-  },
-
-  date: {
-    fontSize: 12,
-    color: "#9CA3AF",
-    marginTop: 3,
-  },
-
-  rightSide: {
-    alignItems: "flex-end",
-  },
-
-  badge: {
-    paddingHorizontal: 12,
-    paddingVertical: 5,
-    borderRadius: 20,
-    marginBottom: 6,
-  },
-
-  badgeText: {
-    fontSize: 12,
-    fontWeight: "600",
-  },
-
-  alertBox: {
-    marginTop: 20,
-    marginBottom:50,
-    padding: 15,
-    borderRadius: 15,
-    alignItems: "center",
-  },
-});

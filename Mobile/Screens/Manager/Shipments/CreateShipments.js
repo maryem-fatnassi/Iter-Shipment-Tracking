@@ -1,174 +1,133 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-} from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { Feather } from "@expo/vector-icons";
+import React, { useState } from 'react';
+import { 
+  Text, TextInput, View, ScrollView, 
+  TouchableOpacity, Platform, StatusBar, KeyboardAvoidingView 
+} from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { styles } from '../Styles/createShipment';
 
-const CreateShipments = ({ addShipment }) => {
-  const [formData, setFormData] = useState({
-    shipmentID: "",
-    itemType: "",
-    receiverName: "",
-    receiverPhone: "",
-    receiverAddress: "",
-    status: "Pending",
-    shipmentDate: new Date().toISOString().slice(0, 10),
-  });
 
-  const handleChange = (name, value) => {
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = () => {
-    if (!formData.shipmentID || !formData.itemType || !formData.receiverName) {
-      alert("Please fill all required fields");
-      return;
-    }
-    addShipment(formData);
-    setFormData({
-      shipmentID: "",
-      itemType: "",
-      receiverName: "",
-      receiverPhone: "",
-      receiverAddress: "",
-      status: "Pending",
-      shipmentDate: new Date().toISOString().slice(0, 10),
-    });
-  };
-
-  return (
-    <LinearGradient
-      colors={["#1E3A8A", "#fff"]}
-      style={styles.gradientContainer}
-    >
-      <View style={styles.container}>
-        <Text style={styles.title}>Create Shipment <Feather name="plus-circle" size={28} color="#fff" /></Text>
-        <ScrollView contentContainerStyle={{ paddingBottom: 20 }} showsVerticalScrollIndicator={false}>
-          <View style={styles.inputWrapper}>
-            <Text style={styles.label}>Shipment ID</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="e.g. SHP12345"
-              placeholderTextColor="#aaa"
-              value={formData.shipmentID}
-              onChangeText={(text) => handleChange("shipmentID", text)}
-            />
-          </View>
-
-          <View style={styles.inputWrapper}>
-            <Text style={styles.label}>Item Type</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Clothes, Shoes, etc."
-              placeholderTextColor="#aaa"
-              value={formData.itemType}
-              onChangeText={(text) => handleChange("itemType", text)}
-            />
-          </View>
-
-          <View style={styles.inputWrapper}>
-            <Text style={styles.label}>Receiver Name</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Full Name"
-              placeholderTextColor="#aaa"
-              value={formData.receiverName}
-              onChangeText={(text) => handleChange("receiverName", text)}
-            />
-          </View>
-
-          <View style={styles.inputWrapper}>
-            <Text style={styles.label}>Receiver Phone</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Phone Number"
-              placeholderTextColor="#aaa"
-              value={formData.receiverPhone}
-              onChangeText={(text) => handleChange("receiverPhone", text)}
-            />
-          </View>
-
-          <View style={styles.inputWrapper}>
-            <Text style={styles.label}>Receiver Address</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="City, Street"
-              placeholderTextColor="#aaa"
-              value={formData.receiverAddress}
-              onChangeText={(text) => handleChange("receiverAddress", text)}
-            />
-          </View>
-
-          <View style={styles.inputWrapper}>
-            <Text style={styles.label}>Shipment Date</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="YYYY-MM-DD"
-              placeholderTextColor="#aaa"
-              value={formData.shipmentDate}
-              onChangeText={(text) => handleChange("shipmentDate", text)}
-            />
-          </View>
-
-          <TouchableOpacity style={styles.btnSubmit} onPress={handleSubmit}>
-            <Text style={styles.btnText}>Create Shipment</Text>
-          </TouchableOpacity>
-        </ScrollView>
-      </View>
-    </LinearGradient>
-  );
+const COLORS = {
+  orange: '#FB923C',
+  blue: '#1E3A8A',
+  lightGray: '#cccccc75',
+  white: '#FFFFFF',
+  textGray: '#64748b'
 };
 
-export default CreateShipments;
+export default function CreateShipments() {
+  const [focusedField, setFocusedField] = useState(null);
 
-const styles = StyleSheet.create({
-  gradientContainer: {
-    flex: 1,
-    padding: 20,
-  },
-  container: {
-    // backgroundColor: "#fff",
-    // borderRadius: 25,
-    // padding: 20,
-    shadowColor: "#000",
-    // shadowOpacity: 0.15,
-    // shadowRadius: 15,
-    // elevation: 10,
-    width:'100%'
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
-    textAlign: "center",
-    color: "#fff",
-  },
-  inputWrapper: { marginBottom: 15 },
-  label: { fontSize: 18, fontWeight: "bold", marginBottom: 5, color: "#000" },
-  input: {
-    backgroundColor: "#f0f0f0",
-    padding: 15,
-    borderRadius: 15,
-    fontSize: 16,
-    color: "#333",
-  },
-  btnSubmit: {
-    marginTop: 10,
-    marginBottom:55,
-    backgroundColor: "#FB923C",
-    paddingVertical: 15,
-    borderRadius: 20,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOpacity: 0.4,
-    shadowRadius: 10,
-    elevation: 5,
-  },
-  btnText: { color: "#fff", fontSize: 18, fontWeight: "bold" },
-});
+  return (
+    <View style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{flex: 1}}>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+          
+          {/* Header */}
+          <View style={styles.header}>
+            <Text style={styles.title}>New Shipment <Text style={{fontSize:24}}>📦✨</Text></Text>
+            <View style={styles.accentBar} />
+          </View>
+
+          {/* Form Section */}
+          <View style={styles.formContainer}>
+            
+            <CustomInput 
+              label="SHIPMENT ID"
+              icon="identifier" 
+              placeholder="SHP-2026-X" 
+              isFocused={focusedField === 'id'}
+              onFocus={() => setFocusedField('id')}
+              onBlur={() => setFocusedField(null)}
+            />
+
+            <View style={styles.row}>
+              <CustomInput 
+                label="ORIGIN"
+                icon="map-marker-outline" 
+                placeholder="From..." 
+                halfWidth 
+                isFocused={focusedField === 'origin'}
+                onFocus={() => setFocusedField('origin')}
+                onBlur={() => setFocusedField(null)}
+              />
+              <CustomInput 
+                label="DESTINATION"
+                icon="map-marker-check" 
+                placeholder="To..." 
+                halfWidth 
+                isFocused={focusedField === 'dest'}
+                onFocus={() => setFocusedField('dest')}
+                onBlur={() => setFocusedField(null)}
+              />
+            </View>
+
+            {/* <View style={styles.row}> */}
+              <CustomInput 
+                label="DATE"
+                icon="calendar-month-outline" 
+                placeholder="03/04/2026" 
+                // halfWidth 
+                isFocused={focusedField === 'date'}
+                onFocus={() => setFocusedField('date')}
+                onBlur={() => setFocusedField(null)}
+              />
+               {/* <CustomInput 
+                label="STATUS"
+                icon="list-status" 
+                placeholder="Pending" 
+                halfWidth 
+                isFocused={focusedField === 'status'}
+                onFocus={() => setFocusedField('status')}
+                onBlur={() => setFocusedField(null)}
+              /> */}
+            {/* </View> */}
+
+            <CustomInput 
+              label="DRIVER NAME"
+              icon="account-outline" 
+              placeholder="Assign a driver" 
+              isFocused={focusedField === 'driver'}
+              onFocus={() => setFocusedField('driver')}
+              onBlur={() => setFocusedField(null)}
+            />
+
+            <CustomInput 
+              label="ORDER COUNT"
+              icon="numeric-box-multiple-outline" 
+              placeholder="0" 
+              keyboardType="numeric"
+              isFocused={focusedField === 'count'}
+              onFocus={() => setFocusedField('count')}
+              onBlur={() => setFocusedField(null)}
+            />
+
+            <TouchableOpacity style={styles.mainButton} activeOpacity={0.8}>
+              <Text style={styles.buttonText} >CONFIRM & CREATE</Text>
+              <MaterialCommunityIcons name="arrow-right-circle" size={24} color={COLORS.white} />
+            </TouchableOpacity>
+          </View>
+
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </View>
+  );
+}
+
+const CustomInput = ({ icon, label, placeholder, halfWidth, isFocused, onFocus, onBlur, keyboardType }) => (
+  <View style={[styles.inputGroup, halfWidth && { width: '48%' }]}>
+    <Text style={[styles.label, isFocused && { color: COLORS.blue }]}>{label}</Text>
+    <View style={[styles.inputWrapper, isFocused && styles.inputFocused]}>
+      <MaterialCommunityIcons name={icon} size={20} color={isFocused ? COLORS.blue : COLORS.textGray} />
+      <TextInput 
+        placeholder={placeholder} 
+        placeholderTextColor="#94a3b8"
+        style={styles.input}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        keyboardType={keyboardType}
+      />
+    </View>
+  </View>
+);
