@@ -80,9 +80,9 @@ export const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 18,
     marginVertical: 8,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: "column",
+    justifyContent: "center",
+    // alignItems: "center",
     elevation: 3,
   },
 
@@ -126,5 +126,79 @@ export const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 15,
     alignItems: "center",
+  },
+  editDeleteContainer:{
+    flexDirection:'row',
+  },
+  editBtn:{
+    marginRight:20
+  },
+  statusSelect:{
+    backgroundColor:'#fff',
+    borderRadius: 10,
+    marginBottom: 12,
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: "#F8FAFC",
+    padding: 20,
+    justifyContent: "center",
+  },
+
+  editInput: {
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    padding: 14,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+    fontSize: 15,
+  },
+
+  dateInput: {
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    padding: 14,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  modalTitle: {
+    fontSize: 26,
+    fontWeight: "bold",
+    marginBottom: 20,
+    color: "#1E3A8A",
+    textAlign: "center",
+  },
+
+  buttonRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 10,
+  },
+
+  saveBtn: {
+    backgroundColor: "#1E3A8A",
+    padding: 14,
+    borderRadius: 10,
+    width: "48%",
+    alignItems: "center",
+  },
+
+  cancelBtn: {
+    backgroundColor: "#E5E7EB",
+    padding: 14,
+    borderRadius: 10,
+    width: "48%",
+    alignItems: "center",
+  },
+
+  btnText: {
+    color: "#fff",
+    fontWeight: "600",
   },
 });

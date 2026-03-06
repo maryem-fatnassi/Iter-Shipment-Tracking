@@ -4,7 +4,10 @@
     "slug": "iter",
     "version": "1.0.0",
     "scheme": "iter",
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router",
+      "@react-native-community/datetimepicker"
+    ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -28,5 +31,4 @@
       "favicon": "./assets/favicon.png"
     }
   }
-
 }
